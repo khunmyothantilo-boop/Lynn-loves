@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>သဲသဲအတွက် ❤️</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Myanmar","Segoe UI",sans-serif}
+body{min-height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;
+background:linear-gradient(135deg,#ffd8e7,#fff3f7,#ffd0e1);color:#5a2940}
+body:before{content:"";position:fixed;inset:-50%;background:radial-gradient(circle,#fff8 0 8%,transparent 9%) 0 0/55px 55px;animation:bg 18s linear infinite;opacity:.45}
+@keyframes bg{to{transform:translate(55px,55px)}}
+.card{position:relative;width:min(94vw,440px);min-height:700px;padding:28px 22px;border-radius:34px;
+background:#ffffffd9;backdrop-filter:blur(16px);box-shadow:0 25px 80px #7e34552b;
+display:flex;flex-direction:column;justify-content:center;text-align:center;overflow:hidden}
+.icon{font-size:70px;filter:drop-shadow(0 7px 8px #d66b9233);animation:pop .7s ease}
+@keyframes pop{0%{transform:scale(.3) rotate(-20deg);opacity:0}70%{transform:scale(1.15) rotate(5deg)}100%{transform:scale(1)}}
+h1{font-size:28px;margin:12px 0 12px}p{font-size:18px;line-height:1.9;white-space:pre-line;margin:0 3px}
+button{border:0;border-radius:999px;padding:14px 22px;margin:8px 4px;font-size:17px;font-weight:800;
+background:linear-gradient(135deg,#ed83a7,#d95f8b);color:white;box-shadow:0 9px 22px #c5537d3b;transition:.15s}
+button:active{transform:scale(.94)}.secondary{background:#fff;color:#c64f7a;border:2px solid #efabc1}
+#controls{margin-top:18px}.progress{height:6px;background:#f5d7e2;border-radius:9px;margin:20px 20px 0;overflow:hidden}
+.bar{height:100%;background:#dc6d93;border-radius:9px;transition:.5s}.counter{font-size:12px;opacity:.5;margin-top:8px}
+#penalty{display:none;font-size:24px;margin-top:8px;font-weight:800}
+.shake{animation:shake .42s}.hit{position:fixed;font-size:55px;pointer-events:none;animation:hit .75s forwards}
+@keyframes shake{20%{transform:translateX(-13px) rotate(-2deg)}40%{transform:translateX(13px) rotate(2deg)}60%{transform:translateX(-9px)}80%{transform:translateX(9px)}}
+@keyframes hit{0%{transform:scale(.3);opacity:0}30%{transform:scale(1.2);opacity:1}100%{transform:translateY(-110px) scale(.7);opacity:0}}
+.float{position:fixed;bottom:-40px;pointer-events:none;animation:float 6s linear forwards;z-index:5}
+@keyframes float{to{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+.flash{position:fixed;inset:0;background:white;opacity:0;pointer-events:none;z-index:9}.flash.on{animation:flash .22s}
+@keyframes flash{50%{opacity:.45}}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<main class="card" id="card">
+  <div id="app"></div><div id="controls"></div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="counter" id="counter"></div>
+</main>
+
+<script>
+const pages=[
+{icon:"💗",title:"သဲသဲရေ…",text:"ဒီ Link လေးကို အဆုံးထိဖတ်ပေးနော် 🥺\nကိုယ်က သဲသဲကို ချော့ချင်လို့ အထူးလုပ်ထားတာပါ ❤️",next:"စဖတ်မယ် 💕"},
+{icon:"🥺",title:"အရင်ဆုံး… ကိုယ်တောင်းပန်ပါတယ်",text:"ကိုယ်မှားခဲ့တာရှိရင် တကယ်တောင်းပန်ပါတယ်နော်။\nအကြောင်းပြချက်ပေးပြီး ကိုယ့်ကိုယ်ကို ကာကွယ်ချင်တာမဟုတ်ဘူး။\nသဲသဲစိတ်မကောင်းဖြစ်သွားတာကို ကိုယ်တကယ်နားလည်ချင်တယ်။",next:"အပြစ်ပေးမယ် 😈"},
+{icon:"👊",title:"သဲသဲက ကိုယ့်ကို အပြစ်ပေးလို့ရတယ် 😂",text:"စိတ်ဆိုးနေသေးရင် ဒီမှာ ကိုယ့်ကို ချစ်စရာ virtual အပြစ်ပေးလို့ရတယ်နော်။\nတစ်ချက်ချင်း နှိပ်လို့ရတယ် 😭😂❤️",next:"ဆက်ချော့မယ် 🥺"},
+{icon:"🫶",title:"ဒါပေမယ့် တစ်ခုပဲ…",text:"ကိုယ်က သဲသဲကို စိတ်ဆိုးအောင်လုပ်ဖို့ မရည်ရွယ်ခဲ့ဘူး။\nသဲသဲစိတ်မကောင်းဖြစ်ရင် ကိုယ်လည်း မပျော်ဘူး။\nမင်းလို့ မရေးဘူးနော် — ဒီနေရာကစပြီး သဲသဲပဲ ❤️",next:"ဆက်ဖတ်မယ် 🌷"},
+{icon:"💕",title:"သဲသဲက ကိုယ့်အတွက် တန်ဖိုးရှိတယ်",text:"ချစ်တယ်လို့ ပြောရုံနဲ့မပြီးဘူးဆိုတာ ကိုယ်သိတယ်။\nသဲသဲမကြိုက်တာတွေကို မှတ်ထားမယ်။\nသဲသဲပြောတာတွေကို ပိုနားထောင်မယ်။\nနောက်တစ်ခါ ပိုကောင်းကောင်းဆက်ဆံပေးမယ်။",next:"နောက်တစ်ခု ❤️"},
+{icon:"😚",title:"ချော့မယ်နော် သဲသဲ…",text:"အခုချက်ချင်း စိတ်မပြေလည်း ရပါတယ်။\nအချိန်လိုရင် အချိန်ယူပါ။\nကိုယ်ကတော့ အတင်းမခိုင်းဘူး။\nဒါပေမယ့် သဲသဲကို ချစ်တယ်၊ တန်ဖိုးထားတယ်ဆိုတာတော့ မပြောင်းဘူးနော်။",next:"နောက်ဆုံး 💌"},
+{icon:"❤️",title:"သဲသဲရေ…",text:"ကိုယ့်ကို နည်းနည်းလေးတော့ ခွင့်လွှတ်ပေးပါနော် 🥺\nစိတ်ဆိုးတဲ့ သဲသဲလည်း ချစ်တယ်။\nစိတ်ကောက်တဲ့ သဲသဲလည်း ချစ်တယ်။\nစကားမပြောချင်တဲ့ သဲသဲလည်း ချစ်တယ်။\n\nအာဘွား 😘😘😘",next:"❤️ အဆုံးသတ်မယ်"},
+{icon:"🌹",title:"ကိုယ့်ရဲ့ သဲသဲအတွက်",text:"ဒီ Link လေးကို ဖွင့်ပြီး အဆုံးထိဖတ်ပေးတဲ့အတွက် ကျေးဇူးတင်တယ်။\n\nကိုယ်က ပြီးပြည့်စုံတဲ့လူတော့ မဟုတ်ဘူး။\nဒါပေမယ့် သဲသဲကို ပိုကောင်းကောင်းချစ်တတ်အောင် ကြိုးစားမယ်။\n\nချစ်တယ် သဲသဲ ❤️\nအာဘွားအများကြီး 😘😘😘😘😘",next:"အစကနေ ပြန်ဖတ်မယ် 🔄"}
+];
+let i=0,hits=0;
+function render(){
+ const p=pages[i];
+ document.getElementById("app").innerHTML=`<div class="icon">${p.icon}</div><h1>${p.title}</h1><p>${p.text}</p>`;
+ if(i===2){
+   document.getElementById("controls").innerHTML=`<button onclick="hit()">👊 တစ်ချက်ပေး</button><button class="secondary" onclick="next()">မထိုးတော့ဘူး 😚</button>`;
+ }else{
+   document.getElementById("controls").innerHTML=`<button onclick="${i===pages.length-1?'restart()':'next()'}">${p.next}</button>`;
+ }
+ document.getElementById("bar").style.width=((i+1)/pages.length*100)+"%";
+ document.getElementById("counter").textContent=`${i+1} / ${pages.length}`;
+}
+function hit(){
+ hits++;
+ const c=document.getElementById("card"); c.classList.remove("shake"); void c.offsetWidth; c.classList.add("shake");
+ document.getElementById("flash").classList.add("on");setTimeout(()=>document.getElementById("flash").classList.remove("on"),230);
+ let e=document.createElement("div");e.className="hit";e.textContent=["👊","💥","😵‍💫","😂"][hits%4];
+ e.style.left=(25+Math.random()*45)+"vw";e.style.top=(35+Math.random()*30)+"vh";document.body.appendChild(e);setTimeout(()=>e.remove(),800);
+ document.getElementById("controls").insertAdjacentHTML("beforeend","");
+}
+function next(){i++;render();burst()}
+function restart(){i=0;hits=0;render()}
+function burst(){for(let n=0;n<8;n++){setTimeout(()=>{let e=document.createElement("div");e.className="float";e.textContent=["❤️","💕","🌸","✨","💗"][Math.floor(Math.random()*5)];e.style.left=Math.random()*100+"vw";e.style.fontSize=(18+Math.random()*24)+"px";document.body.appendChild(e);setTimeout(()=>e.remove(),6500)},n*100)}}
+setInterval(()=>{let e=document.createElement("div");e.className="float";e.textContent=["❤️","💕","✨"][Math.floor(Math.random()*3)];e.style.left=Math.random()*100+"vw";e.style.fontSize=(18+Math.random()*22)+"px";document.body.appendChild(e);setTimeout(()=>e.remove(),6500)},900);
+render();
+</script>
+</body>
+</html>
